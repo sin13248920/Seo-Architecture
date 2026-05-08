@@ -396,6 +396,21 @@ function connectSystem(){
 
         }, 700);
 
+    /* 00001 */
+    else if(code === "00001"){
+
+        document.getElementById('statusText')
+        .innerText =
+            'STATUS : ACCESS GRANTED';
+
+        setTimeout(() => {
+
+            location.href = "00001.html";
+
+        }, 700);
+
+    }
+
     } else {
 
         document.getElementById('statusText')
