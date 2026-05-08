@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>방송 송출 시스템</title>
+
+<style>
+
+/* 전체 폰트 강제 적용 */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+
+    font-family:
+        "굴림",
+        Gulim,
+        "돋움",
+        Dotum,
+        sans-serif !important;
+}
+
+html, body{
+    width:100%;
+    height:100%;
+}
+
+body{
+    overflow:hidden;
+
+    background:#0b0f14;
+
+    color:#d7dde5;
+
+    position:relative;
+}
+
+/* CRT 주사선 효과 */
+body::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.03) 0px,
+            rgba(255,255,255,0.03) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    opacity:0.10;
+
+    pointer-events:none;
+}
+
+/* 상단 바 */
+.topbar{
+    width:100%;
+    height:30px;
+
+    background:#1c232c;
+
+    border-bottom:1px solid #4b5562;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 10px;
+
+    font-size:12px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.led{
+    width:8px;
+    height:8px;
+
+    background:#42ff7b;
+
+    border-radius:1px;
+
+    box-shadow:
+        0 0 8px #42ff7b;
+}
+
+.topbar-right{
+    color:#8e98a6;
+}
+
+/* 중앙 */
+.center-area{
+    width:100%;
+    height:calc(100vh - 30px);
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+}
+
+/* 시스템 상태 */
+.system-text{
+    color:#63ff93;
+
+    font-size:12px;
+
+    margin-bottom:10px;
+
+    letter-spacing:1px;
+}
+
+/* 제목 */
+.main-title{
+    font-size:34px;
+    font-weight:bold;
+
+    color:#f2f5f9;
+
+    margin-bottom:14px;
+}
+
+/* 설명 */
+.subtext{
+    text-align:center;
+
+    font-size:14px;
+
+    color:#9aa4b3;
+
+    line-height:1.7;
+
+    margin-bottom:34px;
+}
+
+/* 코드 입력 */
+.code-box{
+    display:flex;
+    gap:10px;
+
+    margin-bottom:28px;
+}
+
+.code-input{
+    width:64px;
+    height:74px;
+
+    background:#05080c;
+
+    border:2px solid #38424f;
+
+    color:#6dff9d;
+
+    text-align:center;
+
+    font-size:34px;
+    font-weight:bold;
+
+    outline:none;
+
+    box-shadow:
+        inset 0 0 12px rgba(0,0,0,0.8);
+}
+
+.code-input:focus{
+    border-color:#7aa9ff;
+
+    box-shadow:
+        0 0 10px rgba(122,169,255,0.45),
+        inset 0 0 12px rgba(0,0,0,0.8);
+}
+
+/* 버튼 */
+.connect-btn{
+    width:220px;
+    height:44px;
+
+    background:#465362;
+
+    border:1px solid #8f9baa;
+
+    color:#ffffff;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.connect-btn:hover{
+    background:#566577;
+}
+
+.connect-btn:active{
+    transform:translateY(1px);
+}
+
+/* 하단 상태바 */
+.footer{
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:28px;
+
+    background:#1a2027;
+
+    border-top:1px solid #39414d;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 10px;
+
+    font-size:12px;
+
+    color:#8d98a7;
+}
+
+.clock{
+    color:#73ffab;
+}
+
+/* 모바일 */
+@media(max-width:600px){
+
+    .main-title{
+        font-size:26px;
+    }
+
+    .code-input{
+        width:52px;
+        height:62px;
+
+        font-size:28px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- 상단 -->
+<div class="topbar">
+
+    <div class="topbar-left">
+
+        <div class="led"></div>
+
+        <div>
+            방송 송출 시스템
+        </div>
+
+    </div>
+
+    <div class="topbar-right">
+        ONLINE
+    </div>
+
+</div>
+
+<!-- 중앙 -->
+<div class="center-area">
+
+    <div class="system-text">
+        SYSTEM READY
+    </div>
+
+    <div class="main-title">
+        접속 코드 입력
+    </div>
+
+    <div class="subtext">
+        시스템 접속을 위해<br>
+        5자리 인증번호를 입력하십시오.
+    </div>
+
+    <div class="code-box">
+
+        <input type="text" maxlength="1" class="code-input">
+        <input type="text" maxlength="1" class="code-input">
+        <input type="text" maxlength="1" class="code-input">
+        <input type="text" maxlength="1" class="code-input">
+        <input type="text" maxlength="1" class="code-input">
+
+    </div>
+
+    <button class="connect-btn">
+        시스템 접속
+    </button>
+
+</div>
+
+<!-- 하단 -->
+<div class="footer">
+
+    <div id="statusText">
+        STATUS : WAITING
+    </div>
+
+    <div class="clock" id="clock">
+        00:00:00
+    </div>
+
+</div>
+
+<script>
+
+const inputs = document.querySelectorAll('.code-input');
+
+inputs.forEach((input, index) => {
+
+    input.addEventListener('input', (e) => {
+
+        e.target.value =
+            e.target.value.replace(/[^0-9]/g, '');
+
+        if(
+            e.target.value &&
+            index < inputs.length - 1
+        ){
+            inputs[index + 1].focus();
+        }
+
+    });
+
+    input.addEventListener('keydown', (e) => {
+
+        if(
+            e.key === 'Backspace' &&
+            !input.value &&
+            index > 0
+        ){
+            inputs[index - 1].focus();
+        }
+
+    });
+
+});
+
+/* 엔터 */
+document.addEventListener('keydown', (e) => {
+
+    if(e.key === 'Enter'){
+        connectSystem();
+    }
+
+});
+
+/* 버튼 */
+document.querySelector('.connect-btn')
+.addEventListener('click', connectSystem);
+
+/* 접속 처리 */
+function connectSystem(){
+
+    const code = [...inputs]
+        .map(input => input.value)
+        .join('');
+
+    if(code.length !== 5){
+
+        alert('5자리 숫자를 입력하십시오.');
+        return;
+    }
+
+    if(code === "11185"){
+
+        document.getElementById('statusText')
+        .innerText =
+            'STATUS : ACCESS GRANTED';
+
+        setTimeout(() => {
+
+            location.href = "11185.html";
+
+        }, 700);
+
+    } else {
+
+        document.getElementById('statusText')
+        .innerText =
+            'STATUS : ACCESS DENIED';
+
+        alert('인증 실패');
+
+    }
+
+}
+
+/* 시계 */
+function updateClock(){
+
+    const now = new Date();
+
+    const h =
+        String(now.getHours()).padStart(2,'0');
+
+    const m =
+        String(now.getMinutes()).padStart(2,'0');
+
+    const s =
+        String(now.getSeconds()).padStart(2,'0');
+
+    document.getElementById('clock').innerText =
+        `${h}:${m}:${s}`;
+}
+
+setInterval(updateClock, 1000);
+
+updateClock();
+
+</script>
+
+</body>
+</html>
