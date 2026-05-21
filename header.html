@@ -4,41 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header Component</title>
+
     <style>
-        /* 헤더 전체 컨테이너 (양 끝으로 배치하되 좌우 여백 제공) */
+        /* ===== 커스텀 폰트 ===== */
+        @font-face {
+            font-family: 'GwangjuFont';
+            src: url('빛고을광주_Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* 전체 폰트 적용 */
+        * {
+            font-family: 'GwangjuFont', sans-serif;
+        }
+
+        /* ===== 헤더 ===== */
         .site-header {
             display: flex;
-            justify-content: space-between; /* 로고는 왼쪽 끝, 메뉴는 오른쪽 영역으로 */
+            justify-content: space-between;
             align-items: center;
             padding: 20px 10%;
-            background-color: #ffffff; /* 흰색 배경 */
+            background-color: #ffffff;
             width: 100%;
-            border-bottom: 1px solid #eeeeee; /* 정갈한 일자 구분선 */
+            border-bottom: 1px solid #eeeeee;
             transition: all 0.3s ease;
         }
 
-        /* 로고 영역 (완전한 왼쪽 정렬) */
+        /* ===== 로고 ===== */
         .header-logo {
             display: flex;
             align-items: center;
-            text-align: left;
         }
-        
+
         .header-logo a {
             display: inline-block;
             text-decoration: none;
         }
 
         .header-logo img {
-            height: 45px; /* 로고 이미지 높이 */
-            width: auto;  /* 비율 유지 */
+            height: 80px;   /* 🔥 로고 확대 */
+            width: auto;
             display: block;
         }
 
-        /* 네비게이션 메뉴 영역 (오른쪽 공간 내에서 정렬) */
+        /* ===== 메뉴 ===== */
         .header-nav {
             display: flex;
-            justify-content: flex-end; /* 메뉴들을 오른쪽으로 정렬하여 로고와 거리를 둡니다 */
+            justify-content: flex-end;
         }
 
         .header-nav ul {
@@ -46,12 +59,10 @@
             list-style: none;
             margin: 0;
             padding: 0;
-            gap: 50px; /* 메뉴 글자 사이 간격 */
+            gap: 50px;
         }
 
-        /* 메뉴 개별 링크 스타일 (검은색 글씨) */
         .header-nav a {
-            font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
             font-size: 14px;
             font-weight: 500;
             letter-spacing: 2px;
@@ -63,12 +74,10 @@
             transition: color 0.3s ease;
         }
 
-        /* 마우스 호버 시 텍스트 색상 */
         .header-nav a:hover {
             color: #555555;
         }
 
-        /* 메뉴 호버 애니메이션 (지정하신 남색 밑줄) */
         .header-nav a::after {
             content: '';
             position: absolute;
@@ -76,7 +85,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: #002c5f; /* 딥 네이비(남색) */
+            background-color: #002c5f;
             transition: width 0.3s ease;
         }
 
@@ -84,50 +93,61 @@
             width: 100%;
         }
 
-        /* 모바일 및 태블릿 반응형 레이아웃 대응 */
+        /* ===== 반응형 ===== */
         @media (max-width: 768px) {
             .site-header {
-                flex-direction: column; /* 모바일에서는 내추럴하게 세로 배치 */
+                flex-direction: column;
                 gap: 15px;
                 padding: 15px 5%;
             }
+
             .header-logo {
                 width: 100%;
-                justify-content: center; /* 모바일 화면에서는 로고도 가운데가 예쁩니다 */
+                justify-content: center;
             }
+
             .header-nav {
                 width: 100%;
                 justify-content: center;
             }
+
             .header-nav ul {
                 gap: 20px;
             }
+
             .header-nav a {
                 font-size: 13px;
+            }
+
+            .header-logo img {
+                height: 70px; /* 모바일에서는 살짝 줄임 */
             }
         }
     </style>
 </head>
+
 <body>
 
-    <header class="site-header">
-        <!-- 1. 왼쪽 정렬된 로고 이미지 -->
-        <div class="header-logo">
-            <a href="index.html">
-                <img src="seoarchilogo.png" alt="SEO Architecture Logo">
-            </a>
-        </div>
+<header class="site-header">
 
-        <!-- 2. 우측 정렬 서브 메뉴 (남색 밑줄 효과 유지) -->
-        <nav class="header-nav">
-            <ul>
-                <li><a href="SERVICE.html">Service</a></li>
-                <li><a href="PROJECT.html">Project</a></li>
-                <li><a href="ABOUT.html">About</a></li>
-                <li><a href="CONTACT US.html">Contact Us</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- 로고 -->
+    <div class="header-logo">
+        <a href="index.html">
+            <img src="seoarchilogo.png" alt="SEO Architecture Logo">
+        </a>
+    </div>
+
+    <!-- 메뉴 -->
+    <nav class="header-nav">
+        <ul>
+            <li><a href="SERVICE.html">Service</a></li>
+            <li><a href="PROJECT.html">Project</a></li>
+            <li><a href="ABOUT.html">About</a></li>
+            <li><a href="CONTACT US.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+</header>
 
 </body>
 </html>
