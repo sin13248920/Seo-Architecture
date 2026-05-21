@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer Component</title>
+    <style>
+        /* 푸터 전체 컨테이너 (깊이감 있는 다크 그레이 배경) */
+        .site-footer {
+            background-color: #111111; /* 어두운 배경 */
+            width: 100%;
+            padding: 40px 10%; /* 위아래, 좌우 여백 */
+            display: flex;
+            justify-content: flex-start; /* 콘텐츠를 왼쪽 정렬 */
+            align-items: center;
+            border-top: 1px solid #1a1a1a; /* 은은한 상단 구분선 */
+        }
+
+        /* 카피라이트 텍스트 스타일 */
+        .site-footer .copyright {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 300;
+            color: #777777; /* 차분한 회색 톤의 글씨 색상 */
+            letter-spacing: 1px;
+            text-align: left; /* 왼쪽 정렬 */
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* 회사 이름 강조 스타일 */
+        .site-footer .company-name {
+            font-weight: 500;
+            color: #aaaaaa; /* 회사 이름은 살짝 더 밝게 */
+        }
+
+        /* 모바일 반응형 여백 조절 */
+        @media (max-width: 768px) {
+            .site-footer {
+                padding: 30px 5%; /* 모바일에서는 여백을 살짝 줄임 */
+            }
+            .site-footer .copyright {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <footer class="site-footer">
+        <!-- 왼쪽 정렬된 회사명 + 카피라이트 -->
+        <p class="copyright">
+            <span class="company-name">SEO Architecture</span> &copy; 2026. All Rights Reserved.
+        </p>
+    </footer>
+
+</body>
+</html>
