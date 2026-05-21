@@ -1,451 +1,250 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>방송 송출 시스템</title>
-
-<style>
-
-/* 전체 폰트 강제 적용 */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-
-    font-family:
-        "굴림",
-        Gulim,
-        "돋움",
-        Dotum,
-        sans-serif !important;
-}
-
-html, body{
-    width:100%;
-    height:100%;
-}
-
-body{
-    overflow:hidden;
-
-    background:#0b0f14;
-
-    color:#d7dde5;
-
-    position:relative;
-}
-
-/* CRT 주사선 효과 */
-body::before{
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-        repeating-linear-gradient(
-            to bottom,
-            rgba(255,255,255,0.03) 0px,
-            rgba(255,255,255,0.03) 1px,
-            transparent 1px,
-            transparent 3px
-        );
-
-    opacity:0.10;
-
-    pointer-events:none;
-}
-
-/* 상단 바 */
-.topbar{
-    width:100%;
-    height:30px;
-
-    background:#1c232c;
-
-    border-bottom:1px solid #4b5562;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 10px;
-
-    font-size:12px;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.08);
-}
-
-.topbar-left{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.led{
-    width:8px;
-    height:8px;
-
-    background:#42ff7b;
-
-    border-radius:1px;
-
-    box-shadow:
-        0 0 8px #42ff7b;
-}
-
-.topbar-right{
-    color:#8e98a6;
-}
-
-/* 중앙 */
-.center-area{
-    width:100%;
-    height:calc(100vh - 30px);
-
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-
-    padding:20px;
-}
-
-/* 시스템 상태 */
-.system-text{
-    color:#63ff93;
-
-    font-size:12px;
-
-    margin-bottom:10px;
-
-    letter-spacing:1px;
-}
-
-/* 제목 */
-.main-title{
-    font-size:34px;
-    font-weight:bold;
-
-    color:#f2f5f9;
-
-    margin-bottom:14px;
-}
-
-/* 설명 */
-.subtext{
-    text-align:center;
-
-    font-size:14px;
-
-    color:#9aa4b3;
-
-    line-height:1.7;
-
-    margin-bottom:34px;
-}
-
-/* 코드 입력 */
-.code-box{
-    display:flex;
-    gap:10px;
-
-    margin-bottom:28px;
-}
-
-.code-input{
-    width:64px;
-    height:74px;
-
-    background:#05080c;
-
-    border:2px solid #38424f;
-
-    color:#6dff9d;
-
-    text-align:center;
-
-    font-size:34px;
-    font-weight:bold;
-
-    outline:none;
-
-    box-shadow:
-        inset 0 0 12px rgba(0,0,0,0.8);
-}
-
-.code-input:focus{
-    border-color:#7aa9ff;
-
-    box-shadow:
-        0 0 10px rgba(122,169,255,0.45),
-        inset 0 0 12px rgba(0,0,0,0.8);
-}
-
-/* 버튼 */
-.connect-btn{
-    width:220px;
-    height:44px;
-
-    background:#465362;
-
-    border:1px solid #8f9baa;
-
-    color:#ffffff;
-
-    font-size:14px;
-
-    cursor:pointer;
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.15);
-}
-
-.connect-btn:hover{
-    background:#566577;
-}
-
-.connect-btn:active{
-    transform:translateY(1px);
-}
-
-/* 하단 상태바 */
-.footer{
-    position:absolute;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    height:28px;
-
-    background:#1a2027;
-
-    border-top:1px solid #39414d;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 10px;
-
-    font-size:12px;
-
-    color:#8d98a7;
-}
-
-.clock{
-    color:#73ffab;
-}
-
-/* 모바일 */
-@media(max-width:600px){
-
-    .main-title{
-        font-size:26px;
-    }
-
-    .code-input{
-        width:52px;
-        height:62px;
-
-        font-size:28px;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture Studio | 메인</title>
+    <!-- 미니멀하고 세련된 폰트 적용 (구글 폰트 Noto Sans KR & Montserrat) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* 기본 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', 'Noto Sans KR', sans-serif;
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* 헤더/푸터가 삽입될 공간 확보 및 기본 스타일 */
+        #header-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        /* 메인 비주얼 슬라이더 영역 (해안건축 특유의 풀스크린 레이아웃) */
+        .main-visual {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.2s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* 어두운 오버레이로 글씨 가독성 확보 */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        /* 슬라이드 텍스트 스타일 */
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            transform: translateY(30px);
+            transition: transform 1.2s ease-in-out;
+        }
+
+        .slide.active .slide-content {
+            transform: translateY(0);
+        }
+
+        .slide-content .category {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #aaa;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .slide-content h2 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            word-break: keep-all;
+        }
+
+        .slide-content .view-more {
+            display: inline-block;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 5px;
+            transition: color 0.3s, border-color 0.3s;
+        }
+
+        .slide-content .view-more:hover {
+            color: #ccc;
+            border-color: #ccc;
+        }
+
+        /* 슬라이드 인디케이터 (우측 하단 네비게이션 바) */
+        .slider-controls {
+            position: absolute;
+            bottom: 50px;
+            right: 10%;
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        .control-btn {
+            width: 40px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .control-btn.active {
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
 
-<!-- 상단 -->
-<div class="topbar">
+    <!-- 분리된 header.html이 들어올 자리 -->
+    <div id="header-container"></div>
 
-    <div class="topbar-left">
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="main-visual">
+        <div class="slide-container">
+            <!-- 슬라이드 1 (이미지 주소는 작업 시 실제 건축물 이미지로 교체하세요) -->
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-content">
+                    <span class="category">Culture & Public</span>
+                    <h2>도시의 경계를 허무는<br>새로운 문화 네트워킹 공간</h2>
+                    <a href="#" class="view-more">View Project</a>
+                </div>
+            </div>
 
-        <div class="led"></div>
+            <!-- 슬라이드 2 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-content">
+                    <span class="category">Residential</span>
+                    <h2>자연과 삶이 조화를 이루는<br>프리미엄 주거 단지 설계</h2>
+                    <a href="#" class="view-more">View Project</a>
+                </div>
+            </div>
 
-        <div>
-            방송 송출 시스템
+            <!-- 슬라이드 3 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-content">
+                    <span class="category">Corporate Office</span>
+                    <h2>지속 가능한 미래를 위한<br>친환경 인텔리전트 타워</h2>
+                    <a href="#" class="view-more">View Project</a>
+                </div>
+            </div>
         </div>
 
-    </div>
+        <!-- 인디케이터 바 -->
+        <div class="slider-controls">
+            <div class="control-btn active" onclick="currentSlide(0)"></div>
+            <div class="control-btn" onclick="currentSlide(1)"></div>
+            <div class="control-btn" onclick="currentSlide(2)"></div>
+        </div>
+    </main>
 
-    <div class="topbar-right">
-        ONLINE
-    </div>
+    <!-- 분리된 footer.html이 들어올 자리 -->
+    <div id="footer-container"></div>
 
-</div>
 
-<!-- 중앙 -->
-<div class="center-area">
-
-    <div class="system-text">
-        SYSTEM READY
-    </div>
-
-    <div class="main-title">
-        접속 코드 입력
-    </div>
-
-    <div class="subtext">
-        시스템 접속을 위해<br>
-        5자리 인증번호를 입력하십시오.
-    </div>
-
-    <div class="code-box">
-
-        <input type="text" maxlength="1" class="code-input">
-        <input type="text" maxlength="1" class="code-input">
-        <input type="text" maxlength="1" class="code-input">
-        <input type="text" maxlength="1" class="code-input">
-        <input type="text" maxlength="1" class="code-input">
-
-    </div>
-
-    <button class="connect-btn">
-        시스템 접속
-    </button>
-
-</div>
-
-<!-- 하단 -->
-<div class="footer">
-
-    <div id="statusText">
-        STATUS : WAITING
-    </div>
-
-    <div class="clock" id="clock">
-        00:00:00
-    </div>
-
-</div>
-
-<script>
-
-const inputs = document.querySelectorAll('.code-input');
-
-inputs.forEach((input, index) => {
-
-    input.addEventListener('input', (e) => {
-
-        e.target.value =
-            e.target.value.replace(/[^0-9]/g, '');
-
-        if(
-            e.target.value &&
-            index < inputs.length - 1
-        ){
-            inputs[index + 1].focus();
+    <!-- 스크립트: 헤더/푸터 로드 및 슬라이더 제어 -->
+    <script>
+        // 1. 컴포넌트(Header, Footer) 파일 로드 함수
+        // 깃허브 페이지 환경에서 완벽하게 작동하도록 Vanilla JS fetch를 사용합니다.
+        function loadComponent(elementId, filePath) {
+            fetch(filePath)
+                .then(response => {
+                    if (!response.ok) throw new Error('파일을 찾을 수 없습니다.');
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                })
+                .catch(error => console.error('에러 발생:', error));
         }
 
-    });
+        // 페이지 로드 시 헤더와 푸터 불러오기
+        window.addEventListener('DOMContentLoaded', () => {
+            loadComponent('header-container', 'header.html');
+            loadComponent('footer-container', 'footer.html');
+        });
 
-    input.addEventListener('keydown', (e) => {
+        // 2. 메인 비주얼 슬라이더 기능
+        let currentIdx = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.control-btn');
+        const totalSlides = slides.length;
 
-        if(
-            e.key === 'Backspace' &&
-            !input.value &&
-            index > 0
-        ){
-            inputs[index - 1].focus();
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentIdx = index;
         }
 
-    });
+        function nextSlide() {
+            let nextIdx = (currentIdx + 1) % totalSlides;
+            showSlide(nextIdx);
+        }
 
-});
+        function currentSlide(index) {
+            showSlide(index);
+            clearInterval(slideInterval); // 수동 조작 시 타이머 초기화 후 재시작
+            slideInterval = setInterval(nextSlide, 5000);
+        }
 
-/* 엔터 */
-document.addEventListener('keydown', (e) => {
-
-    if(e.key === 'Enter'){
-        connectSystem();
-    }
-
-});
-
-/* 버튼 */
-document.querySelector('.connect-btn')
-.addEventListener('click', connectSystem);
-
-/* 접속 처리 */
-function connectSystem(){
-
-    const code = [...inputs]
-        .map(input => input.value)
-        .join('');
-
-    if(code.length !== 5){
-
-        alert('5자리 숫자를 입력하십시오.');
-        return;
-    }
-
-    if(code === "11185"){
-
-        document.getElementById('statusText')
-        .innerText =
-            'STATUS : ACCESS GRANTED';
-
-        setTimeout(() => {
-
-            location.href = "11185.html";
-
-        }, 700);
-
-    /* 00001 */
-    else if(code === "00001"){
-
-        document.getElementById('statusText')
-        .innerText =
-            'STATUS : ACCESS GRANTED';
-
-        setTimeout(() => {
-
-            location.href = "00001.html";
-
-        }, 700);
-
-    }
-
-    } else {
-
-        document.getElementById('statusText')
-        .innerText =
-            'STATUS : ACCESS DENIED';
-
-        alert('인증 실패');
-
-    }
-
-}
-
-/* 시계 */
-function updateClock(){
-
-    const now = new Date();
-
-    const h =
-        String(now.getHours()).padStart(2,'0');
-
-    const m =
-        String(now.getMinutes()).padStart(2,'0');
-
-    const s =
-        String(now.getSeconds()).padStart(2,'0');
-
-    document.getElementById('clock').innerText =
-        `${h}:${m}:${s}`;
-}
-
-setInterval(updateClock, 1000);
-
-updateClock();
-
-</script>
-
+        // 5초마다 자동으로 슬라이드 전환
+        let slideInterval = setInterval(nextSlide, 5000);
+    </script>
 </body>
 </html>
