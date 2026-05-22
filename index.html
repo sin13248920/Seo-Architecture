@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Architecture Studio | 메인</title>
+<title>서오건축</title>
 
 <style>
 * {
@@ -14,86 +14,75 @@
 
 body {
     font-family: "Times New Roman", Times, serif;
-    background-color: #000;
+    background: #000;
     color: #fff;
     overflow-x: hidden;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 #header-container {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 9999;
 }
 
-/* MAIN */
+/* =========================
+   MAIN VISUAL
+========================= */
 .main-visual {
     position: relative;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
 }
 
+/* SLIDES */
 .slide-container {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-/* 🔥 핵심 수정: 중앙 정렬 */
 .slide {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
 
-    display: block;
-    text-decoration: none;
-    color: inherit;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
 
     opacity: 0;
-    transition: opacity 1.2s ease-in-out;
+    transition: opacity 1.2s ease;
 
     background-size: cover;
     background-position: center;
-
-    padding: 0 10%;
-
-    display: flex;
-    align-items: center; /* ← 핵심 */
 }
 
 .slide.active {
     opacity: 1;
 }
 
+/* DARK OVERLAY */
 .slide::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.4);
-    z-index: 1;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
 }
 
-/* 🔥 여기 중요 */
+/* TEXT */
 .slide-content {
     position: relative;
     z-index: 2;
     max-width: 800px;
-
-    transform: translateY(0); /* ← 기존 위로 밀던 효과 제거 */
 }
 
 .category {
     font-size: 14px;
     letter-spacing: 2px;
-    text-transform: uppercase;
     color: #aaa;
     margin-bottom: 15px;
     display: block;
@@ -108,82 +97,160 @@ h2 {
 
 .view-more {
     display: inline-block;
-    color: #fff;
     font-size: 13px;
     letter-spacing: 2px;
     border-bottom: 1px solid #fff;
     padding-bottom: 5px;
+    color: #fff;
+    text-decoration: none;
 }
 
-/* CONTROLS */
-.slider-controls {
+/* =========================
+   UI (compact horizontal)
+========================= */
+.slide-ui {
     position: absolute;
     bottom: 50px;
     right: 10%;
-    z-index: 10;
+
     display: flex;
-    gap: 15px;
+    flex-direction: row;
+    gap: 20px;
+
+    z-index: 10;
 }
 
-.control-btn {
-    width: 40px;
+/* item */
+.ui-item {
+    display: flex;
+    flex-direction: column; /* 숫자 위 */
+    align-items: flex-start;
+    gap: 6px;
+}
+
+/* number */
+.ui-num {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #fff;
+    opacity: 0.85;
+}
+
+/* bar (짧게) */
+.ui-bar {
+    width: 80px;  /* 🔥 핵심: 짧게 */
     height: 2px;
-    background-color: rgba(255,255,255,0.3);
-    cursor: pointer;
+    background: rgba(255,255,255,0.25);
+    overflow: hidden;
 }
 
-.control-btn.active {
-    background-color: #fff;
+/* fill */
+.ui-fill {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transform: translateX(-100%);
+}
+
+/* active animation */
+.ui-fill.active {
+    animation: fillMove 5s linear forwards;
+}
+
+/* completed */
+.ui-fill.done {
+    transform: translateX(0%);
+}
+
+/* animation */
+@keyframes fillMove {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0%); }
+}
+
+/* =========================
+   FOOTER
+========================= */
+#footer-container {
+    position: relative;
+    z-index: 1;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <div id="header-container"></div>
 
+<!-- MAIN -->
 <main class="main-visual">
-<div class="slide-container">
 
-    <a class="slide active" href="projects/00001.html"
-       style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
-        <div class="slide-content">
-            <span class="category">2025년, 서울시 서오동</span>
-            <h2>서오그룹<br>신사옥</h2>
-            <span class="view-more">View Project</span>
+    <div class="slide-container">
+
+        <!-- SLIDE 1 -->
+        <div class="slide active"
+             style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
+
+            <div class="slide-content">
+                <span class="category">Seoul, Seo-oh</span>
+                <h2>서오그룹<br>신사옥</h2>
+                <a class="view-more" href="projects/00001.html">View Project</a>
+            </div>
         </div>
-    </a>
 
-    <a class="slide" href="projects/00004.html"
-       style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
-        <div class="slide-content">
-            <span class="category">2026년, 서울시 서오동</span>
-            <h2>e편한세상<br>서오 포레스타</h2>
-            <span class="view-more">View Project</span>
+        <!-- SLIDE 2 -->
+        <div class="slide"
+             style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
+
+            <div class="slide-content">
+                <span class="category">Seoul, Seo-oh</span>
+                <h2>e편한세상<br>서오 포레스타</h2>
+                <a class="view-more" href="projects/00004.html">View Project</a>
+            </div>
         </div>
-    </a>
 
-    <a class="slide" href="projects/00005.html"
-       style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
-        <div class="slide-content">
-            <span class="category">2026년, 서울시 서광동</span>
-            <h2>서오출판사<br>신사옥</h2>
-            <span class="view-more">View Project</span>
+        <!-- SLIDE 3 -->
+        <div class="slide"
+             style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
+
+            <div class="slide-content">
+                <span class="category">Seoul, Seogwang</span>
+                <h2>서오출판사<br>신사옥</h2>
+                <a class="view-more" href="projects/00005.html">View Project</a>
+            </div>
         </div>
-    </a>
 
-</div>
+    </div>
 
-<div class="slider-controls">
-    <div class="control-btn active" onclick="currentSlide(0)"></div>
-    <div class="control-btn" onclick="currentSlide(1)"></div>
-    <div class="control-btn" onclick="currentSlide(2)"></div>
-</div>
+    <!-- UI -->
+    <div class="slide-ui">
+
+        <div class="ui-item">
+            <span class="ui-num">01</span>
+            <div class="ui-bar"><div class="ui-fill"></div></div>
+        </div>
+
+        <div class="ui-item">
+            <span class="ui-num">02</span>
+            <div class="ui-bar"><div class="ui-fill"></div></div>
+        </div>
+
+        <div class="ui-item">
+            <span class="ui-num">03</span>
+            <div class="ui-bar"><div class="ui-fill"></div></div>
+        </div>
+
+    </div>
+
 </main>
 
+<!-- FOOTER -->
 <div id="footer-container"></div>
 
 <script>
+
+/* HEADER / FOOTER LOAD */
 function loadComponent(id, file) {
     fetch(file)
         .then(res => res.text())
@@ -195,32 +262,58 @@ window.addEventListener('DOMContentLoaded', () => {
     loadComponent('footer-container', 'footer.html');
 });
 
+/* SLIDER LOGIC */
 let currentIdx = 0;
 const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.control-btn');
-const totalSlides = slides.length;
+const fills = document.querySelectorAll('.ui-fill');
+const total = slides.length;
 
+/* bars update */
+function updateBars(index) {
+
+    fills.forEach((fill, i) => {
+
+        if (i < index) {
+            fill.classList.remove('active');
+            fill.classList.add('done');
+        } else if (i === index) {
+            fill.classList.remove('done');
+            void fill.offsetWidth;
+            fill.classList.add('active');
+        } else {
+            fill.classList.remove('active', 'done');
+        }
+
+    });
+}
+
+/* show slide */
 function showSlide(index) {
-    slides.forEach(s => s.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
 
+    slides.forEach(s => s.classList.remove('active'));
     slides[index].classList.add('active');
-    dots[index].classList.add('active');
 
     currentIdx = index;
+
+    updateBars(index);
 }
 
+/* next */
 function nextSlide() {
-    showSlide((currentIdx + 1) % totalSlides);
+    showSlide((currentIdx + 1) % total);
 }
 
+/* manual control */
 function currentSlide(index) {
     showSlide(index);
     clearInterval(slideInterval);
-    slideInterval = setInterval(nextSlide, 5000);
+    slideInterval = setInterval(nextSlide, 8000);
 }
 
-let slideInterval = setInterval(nextSlide, 5000);
+/* init */
+showSlide(0);
+let slideInterval = setInterval(nextSlide, 8000);
+
 </script>
 
 </body>
