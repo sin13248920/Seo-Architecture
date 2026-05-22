@@ -22,6 +22,10 @@
     font-family:'GwangjuFont', sans-serif;
 }
 
+body{
+    background:#fff;
+}
+
 /* ===== 헤더 ===== */
 .site-header{
     position:fixed;
@@ -74,7 +78,7 @@
     transition:height 0.3s ease;
 }
 
-/* 스크롤 시 로고 축소 */
+/* ===== 스크롤 시 로고 축소 ===== */
 .site-header.scrolled .header-logo img{
     height:52px;
 }
@@ -121,7 +125,7 @@
     opacity:0.7;
 }
 
-/* 밑줄 */
+/* ===== 밑줄 ===== */
 .header-nav a::after{
     content:'';
 
@@ -217,7 +221,8 @@ window.addEventListener('scroll', function(){
 
     const header = document.getElementById('siteHeader');
 
-    if(window.scrollY > 50){
+    /* 아주 조금만 스크롤해도 흰 배경 적용 */
+    if(window.scrollY > 1){
         header.classList.add('scrolled');
     }else{
         header.classList.remove('scrolled');
