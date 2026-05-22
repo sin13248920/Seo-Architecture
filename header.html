@@ -1,45 +1,222 @@
-<!-- 로고 -->
-<div class="header-logo">
-    <a href="index.html">
-        <img
-            id="headerLogo"
-            src="seoarchilogow.png"
-            alt="SEO Architecture Logo">
-    </a>
-</div>
+<style>
 
-<script>
+/* ===== 커스텀 폰트 ===== */
+@font-face{
+    font-family:'GwangjuFont';
+    src:url('빛고을광주_Medium.ttf') format('truetype');
+    font-weight:normal;
+    font-style:normal;
+}
 
-/* ===== 헤더 스크롤 효과 ===== */
+/* ===== 헤더 전용 ===== */
+.site-header,
+.site-header *{
+    box-sizing:border-box;
+    font-family:'GwangjuFont', sans-serif;
+}
 
-const header = document.getElementById('siteHeader');
-const logo = document.getElementById('headerLogo');
+/* ===== 헤더 ===== */
+.site-header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
 
-function updateHeader(){
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-    /* 스크롤 시 */
-    if(window.scrollY > 0){
+    padding:10px 6%;
 
-        header.classList.add('scrolled');
+    z-index:99999;
 
-        /* 기존 로고 */
-        logo.src = 'seoarchilogo.png';
+    background:transparent;
 
-    }else{
+    transition:
+        background 0.35s ease,
+        box-shadow 0.35s ease,
+        padding 0.35s ease,
+        backdrop-filter 0.35s ease;
+}
 
-        header.classList.remove('scrolled');
+/* ===== 스크롤 시 ===== */
+.site-header.scrolled{
+    background:#ffffff;
+    backdrop-filter:blur(10px);
 
-        /* 흰색 로고 */
-        logo.src = 'seoarchilogow.png';
+    box-shadow:
+        0 2px 15px rgba(0,0,0,0.08);
 
+    padding:8px 6%;
+}
+
+/* ===== 로고 ===== */
+.header-logo{
+    display:flex;
+    align-items:center;
+}
+
+.header-logo a{
+    display:inline-block;
+    text-decoration:none;
+}
+
+.header-logo img{
+    height:58px;
+    width:auto;
+
+    display:block;
+
+    transition:
+        height 0.3s ease,
+        opacity 0.3s ease;
+}
+
+/* ===== 스크롤 시 로고 ===== */
+.site-header.scrolled .header-logo img{
+    height:52px;
+}
+
+/* ===== 메뉴 ===== */
+.header-nav{
+    display:flex;
+    align-items:center;
+}
+
+.header-nav ul{
+    display:flex;
+    align-items:center;
+    list-style:none;
+
+    gap:38px;
+
+    margin:0;
+    padding:0;
+}
+
+/* ===== 메뉴 링크 ===== */
+.header-nav a{
+    position:relative;
+
+    font-size:13px;
+    font-weight:500;
+    letter-spacing:1.5px;
+
+    color:#ffffff;
+
+    text-decoration:none;
+    text-transform:uppercase;
+
+    padding-bottom:4px;
+
+    transition:
+        color 0.3s ease,
+        opacity 0.3s ease;
+}
+
+/* ===== 스크롤 시 메뉴 색 ===== */
+.site-header.scrolled .header-nav a{
+    color:#000000;
+}
+
+/* ===== 호버 ===== */
+.header-nav a:hover{
+    opacity:0.7;
+}
+
+/* ===== 밑줄 ===== */
+.header-nav a::after{
+    content:'';
+
+    position:absolute;
+    left:0;
+    bottom:0;
+
+    width:0;
+    height:1.5px;
+
+    background:#ffffff;
+
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+/* ===== 스크롤 시 밑줄 ===== */
+.site-header.scrolled .header-nav a::after{
+    background:#002c5f;
+}
+
+.header-nav a:hover::after{
+    width:100%;
+}
+
+/* ===== 모바일 ===== */
+@media (max-width:768px){
+
+    .site-header{
+        padding:10px 5%;
+        flex-direction:column;
+        gap:12px;
+    }
+
+    .site-header.scrolled{
+        padding:8px 5%;
+    }
+
+    .header-logo{
+        width:100%;
+        justify-content:center;
+    }
+
+    .header-logo img{
+        height:48px;
+    }
+
+    .site-header.scrolled .header-logo img{
+        height:44px;
+    }
+
+    .header-nav{
+        width:100%;
+        justify-content:center;
+    }
+
+    .header-nav ul{
+        gap:18px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .header-nav a{
+        font-size:11px;
+        letter-spacing:1px;
     }
 
 }
 
-/* 페이지 로드 시 즉시 실행 */
-updateHeader();
+</style>
 
-/* 스크롤 시 실행 */
-window.addEventListener('scroll', updateHeader);
+<header class="site-header" id="siteHeader">
 
-</script>
+    <!-- 로고 -->
+    <div class="header-logo">
+        <a href="index.html">
+            <img
+                id="headerLogo"
+                src="seoarchilogow.png"
+                alt="SEO Architecture Logo">
+        </a>
+    </div>
+
+    <!-- 메뉴 -->
+    <nav class="header-nav">
+        <ul>
+            <li><a href="SERVICE.html">Service</a></li>
+            <li><a href="PROJECT.html">Project</a></li>
+            <li><a href="ABOUT.html">About</a></li>
+            <li><a href="CONTACT US.html">Contact</a></li>
+        </ul>
+    </nav>
+
+</header>
