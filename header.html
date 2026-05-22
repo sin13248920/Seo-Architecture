@@ -22,11 +22,6 @@
     font-family:'GwangjuFont', sans-serif;
 }
 
-body{
-    background:#ffffff;
-    min-height:200vh; /* 스크롤 테스트용 */
-}
-
 /* ===== 헤더 ===== */
 .site-header{
     position:fixed;
@@ -78,7 +73,9 @@ body{
     width:auto;
     display:block;
 
-    transition:height 0.3s ease;
+    transition:
+        height 0.3s ease,
+        opacity 0.3s ease;
 }
 
 /* ===== 스크롤 시 로고 ===== */
@@ -140,9 +137,16 @@ body{
     width:0;
     height:1.5px;
 
-    background:#002c5f;
+    background:#ffffff;
 
-    transition:width 0.3s ease;
+    transition:
+        width 0.3s ease,
+        background 0.3s ease;
+}
+
+/* ===== 스크롤 시 밑줄 ===== */
+.site-header.scrolled .header-nav a::after{
+    background:#002c5f;
 }
 
 .header-nav a:hover::after{
@@ -203,7 +207,10 @@ body{
     <!-- 로고 -->
     <div class="header-logo">
         <a href="index.html">
-            <img src="seoarchilogo.png" alt="SEO Architecture Logo">
+            <img
+                id="headerLogo"
+                src="seoarchilogow.png"
+                alt="SEO Architecture Logo">
         </a>
     </div>
 
@@ -224,6 +231,7 @@ body{
 /* ===== 헤더 스크롤 효과 ===== */
 
 const header = document.getElementById('siteHeader');
+const logo = document.getElementById('headerLogo');
 
 function updateHeader(){
 
@@ -232,9 +240,15 @@ function updateHeader(){
 
         header.classList.add('scrolled');
 
+        /* 흰 배경용 로고 */
+        logo.src = 'seoarchilogo.png';
+
     }else{
 
         header.classList.remove('scrolled');
+
+        /* 투명 배경용 흰 로고 */
+        logo.src = 'seoarchilogow.png';
 
     }
 
