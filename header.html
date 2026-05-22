@@ -7,11 +7,11 @@
 <style>
 
 /* ===== 커스텀 폰트 ===== */
-@font-face {
-    font-family: 'GwangjuFont';
-    src: url('빛고을광주_Medium.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+@font-face{
+    font-family:'GwangjuFont';
+    src:url('빛고을광주_Medium.ttf') format('truetype');
+    font-weight:normal;
+    font-style:normal;
 }
 
 /* ===== 전체 ===== */
@@ -23,7 +23,8 @@
 }
 
 body{
-    background:#fff;
+    background:#ffffff;
+    min-height:200vh; /* 스크롤 테스트용 */
 }
 
 /* ===== 헤더 ===== */
@@ -39,12 +40,12 @@ body{
 
     padding:10px 6%;
 
-    z-index:9999;
+    z-index:99999;
 
     background:transparent;
 
     transition:
-        background-color 0.35s ease,
+        background 0.35s ease,
         box-shadow 0.35s ease,
         padding 0.35s ease,
         backdrop-filter 0.35s ease;
@@ -52,9 +53,11 @@ body{
 
 /* ===== 스크롤 시 ===== */
 .site-header.scrolled{
-    background:rgba(255,255,255,0.96);
+    background:#ffffff;
     backdrop-filter:blur(10px);
-    box-shadow:0 2px 15px rgba(0,0,0,0.08);
+
+    box-shadow:
+        0 2px 15px rgba(0,0,0,0.08);
 
     padding:8px 6%;
 }
@@ -78,7 +81,7 @@ body{
     transition:height 0.3s ease;
 }
 
-/* ===== 스크롤 시 로고 축소 ===== */
+/* ===== 스크롤 시 로고 ===== */
 .site-header.scrolled .header-logo img{
     height:52px;
 }
@@ -91,6 +94,7 @@ body{
 
 .header-nav ul{
     display:flex;
+    align-items:center;
     list-style:none;
     gap:38px;
 }
@@ -115,7 +119,7 @@ body{
         opacity 0.3s ease;
 }
 
-/* ===== 스크롤 시 메뉴 검정 ===== */
+/* ===== 스크롤 시 메뉴 색 ===== */
 .site-header.scrolled .header-nav a{
     color:#000000;
 }
@@ -159,8 +163,8 @@ body{
     }
 
     .header-logo{
-        justify-content:center;
         width:100%;
+        justify-content:center;
     }
 
     .header-logo img{
@@ -186,6 +190,7 @@ body{
         font-size:11px;
         letter-spacing:1px;
     }
+
 }
 
 </style>
@@ -217,18 +222,29 @@ body{
 <script>
 
 /* ===== 헤더 스크롤 효과 ===== */
-window.addEventListener('scroll', function(){
 
-    const header = document.getElementById('siteHeader');
+const header = document.getElementById('siteHeader');
 
-    /* 아주 조금만 스크롤해도 흰 배경 적용 */
-    if(window.scrollY > 1){
+function updateHeader(){
+
+    /* 조금이라도 스크롤하면 */
+    if(window.scrollY > 0){
+
         header.classList.add('scrolled');
+
     }else{
+
         header.classList.remove('scrolled');
+
     }
 
-});
+}
+
+/* 페이지 로드 시 즉시 실행 */
+updateHeader();
+
+/* 스크롤 시 실행 */
+window.addEventListener('scroll', updateHeader);
 
 </script>
 
