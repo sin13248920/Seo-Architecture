@@ -35,15 +35,7 @@ body{
     top:0;
     left:0;
     width:100%;
-
-    /* 수정 */
     z-index:999999;
-    pointer-events:none;
-}
-
-/* header 자체는 클릭 가능 */
-#header-container .site-header{
-    pointer-events:auto;
 }
 
 /* =========================
@@ -53,9 +45,6 @@ body{
     position:relative;
     width:100%;
     height:100vh;
-
-    /* 수정 */
-    z-index:1;
     overflow:hidden;
 }
 
@@ -63,9 +52,6 @@ body{
     width:100%;
     height:100%;
     position:relative;
-
-    /* 수정 */
-    z-index:1;
 }
 
 .slide{
@@ -83,9 +69,6 @@ body{
 
     background-size:cover;
     background-position:center;
-
-    /* 수정 */
-    z-index:1;
 }
 
 /* active */
@@ -99,11 +82,7 @@ body{
     content:'';
     position:absolute;
     inset:0;
-
     background:rgba(0,0,0,0.48);
-
-    /* 수정 */
-    z-index:1;
 }
 
 /* =========================
@@ -111,11 +90,11 @@ body{
 ========================= */
 .slide-content{
     position:relative;
-    z-index:10;
+    z-index:5;
 
     max-width:800px;
 
-    padding-top:70px;
+    padding-top:90px;
 }
 
 .category{
@@ -174,7 +153,7 @@ body{
     display:flex;
     gap:18px;
 
-    z-index:30;
+    z-index:20;
 }
 
 .ui-item{
@@ -251,9 +230,6 @@ section{
 .about-section{
     background:#ffffff;
     color:#111;
-
-    position:relative;
-    z-index:5;
 }
 
 .about-text{
@@ -293,9 +269,6 @@ section{
 .project-section{
     background:#f5f5f5;
     color:#111;
-
-    position:relative;
-    z-index:5;
 }
 
 .project-grid{
@@ -324,6 +297,12 @@ section{
     background-position:center;
 
     margin-bottom:18px;
+
+    transition:transform 0.5s ease;
+}
+
+.project-card:hover .img{
+    transform:scale(1.04);
 }
 
 /* titles */
@@ -345,7 +324,7 @@ section{
 ========================= */
 #footer-container{
     position:relative;
-    z-index:5;
+    z-index:1;
 }
 
 /* =========================
@@ -358,7 +337,7 @@ section{
     }
 
     .slide-content{
-        padding-top:90px;
+        padding-top:120px;
     }
 
     .slide-content h2{
@@ -611,28 +590,56 @@ section{
 /* =========================
    LOAD COMPONENT
 ========================= */
-function loadComponent(id, file){
 
-    fetch(file)
-    .then(response => response.text())
-    .then(data => {
+async function loadComponent(id, file){
 
-        document.getElementById(id).innerHTML = data;
+    const response = await fetch(file);
+    const data = await response.text();
 
-    });
+    document.getElementById(id).innerHTML = data;
 
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+/* =========================
+   INIT
+========================= */
 
-    loadComponent('header-container', 'header.html');
-    loadComponent('footer-container', 'footer.html');
+window.addEventListener('DOMContentLoaded', async () => {
+
+    /* header/footer load */
+    await loadComponent('header-container', 'header.html');
+    await loadComponent('footer-container', 'footer.html');
+
+    /* =========================
+       HEADER SCROLL
+    ========================= */
+
+    const header = document.getElementById('siteHeader');
+
+    function updateHeader(){
+
+        if(window.scrollY > 0){
+
+            header.classList.add('scrolled');
+
+        }else{
+
+            header.classList.remove('scrolled');
+
+        }
+
+    }
+
+    updateHeader();
+
+    window.addEventListener('scroll', updateHeader);
 
 });
 
 /* =========================
    SLIDER
 ========================= */
+
 const slides = document.querySelectorAll('.slide');
 const fills = document.querySelectorAll('.ui-fill');
 
@@ -644,9 +651,10 @@ function updateBars(index){
 
     fills.forEach((fill, i) => {
 
+        fill.classList.remove('active');
+
         if(i < index){
 
-            fill.classList.remove('active');
             fill.classList.add('done');
 
         }else if(i === index){
@@ -659,7 +667,7 @@ function updateBars(index){
 
         }else{
 
-            fill.classList.remove('active', 'done');
+            fill.classList.remove('done');
 
         }
 
