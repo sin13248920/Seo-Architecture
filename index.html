@@ -174,15 +174,63 @@
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
                 <div class="slide-content">
                     <span class="category">Residential</span>
-                    <h2>자연과 삶이 조화를 이루는<br>프리미엄 주거 단지 설계</h2>
+                    <h2>서오그룹<br>신사옥       }
+
+        /* =========================
+           슬라이더 버튼
+        ========================= */
+        .slider-controls {
+            position: absolute;
+            bottom: 50px;
+            right: 10%;
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        .control-btn {
+            width: 40px;
+            height: 2px;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .control-btn.active {
+            background-color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header-container"></div>
+
+    <!-- MAIN -->
+    <main class="main-visual">
+        <div class="slide-container">
+
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-content">
+                    <span class="category">2025년, 서울시 서오동</span>
+                    <h2>서오그룹<br>신사옥</h2>
+                    <a href="#" class="view-more">View Project</a>
+                </div>
+            </div>
+
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-content">
+                    <span class="category">2026년, 서울시 서오동</span>
+                    <h2>e편한세상<br>서오 포레스타</h2>
                     <a href="#" class="view-more">View Project</a>
                 </div>
             </div>
 
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
                 <div class="slide-content">
-                    <span class="category">Corporate Office</span>
-                    <h2>지속 가능한 미래를 위한<br>친환경 인텔리전트 타워</h2>
+                    <span class="category">2026년, 서울시 서광동</span>
+                    <h2>서오출판사<br>신사옥</h2>
                     <a href="#" class="view-more">View Project</a>
                 </div>
             </div>
