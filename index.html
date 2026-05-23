@@ -6,382 +6,234 @@
 <title>Architecture Studio | 메인</title>
 
 <style>
-
-/* =========================
-   RESET
-========================= */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:"Times New Roman", Times, serif;
-    background:#000;
-    color:#fff;
-    overflow-x:hidden;
+body {
+    font-family: "Times New Roman", Times, serif;
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
 }
 
 /* =========================
    HEADER
 ========================= */
-#header-container{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:999999;
+#header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
 }
 
 /* =========================
    HERO SLIDER
 ========================= */
-.main-visual{
-    position:relative;
-    width:100%;
-    height:100vh;
-    overflow:hidden;
+.main-visual {
+    position: relative;
+    width: 100%;
+    height: 100vh;
 }
 
-.slide-container{
-    width:100%;
-    height:100%;
-    position:relative;
+.slide-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
-.slide{
-    position:absolute;
-    inset:0;
+.slide {
+    position: absolute;
+    inset: 0;
 
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
 
-    padding:0 10%;
+    opacity: 0;
+    transition: opacity 1.2s ease;
 
-    opacity:0;
-
-    transition:opacity 1.2s ease;
-
-    background-size:cover;
-    background-position:center;
+    background-size: cover;
+    background-position: center;
 }
 
-/* active */
-.slide.active{
-    opacity:1;
-    z-index:2;
+.slide.active {
+    opacity: 1;
 }
 
 /* overlay */
-.slide::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.48);
+.slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+}
+
+.slide-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.category {
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #aaa;
+    margin-bottom: 15px;
+    display: block;
+}
+
+h2 {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 25px;
+}
+
+.view-more {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
+    color: #fff;
+    text-decoration: none;
 }
 
 /* =========================
-   CONTENT
+   SLIDER UI (compact horizontal)
 ========================= */
-.slide-content{
-    position:relative;
-    z-index:5;
+.slide-ui {
+    position: absolute;
+    bottom: 30px;
+    right: 6%;
 
-    max-width:800px;
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
 
-    padding-top:90px;
+    z-index: 10;
 }
 
-.category{
-    display:block;
-
-    font-size:14px;
-    letter-spacing:2px;
-
-    color:rgba(255,255,255,0.7);
-
-    margin-bottom:18px;
+.ui-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
 }
 
-.slide-content h2{
-    font-size:clamp(38px, 5vw, 72px);
-    font-weight:300;
-    line-height:1.15;
-
-    margin-bottom:28px;
+.ui-num {
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #fff;
+    opacity: 0.85;
 }
 
-/* button */
-.view-more{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-
-    color:#fff;
-    text-decoration:none;
-
-    font-size:12px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-
-    padding-bottom:6px;
-
-    border-bottom:1px solid rgba(255,255,255,0.8);
-
-    transition:all 0.3s ease;
+.ui-bar {
+    width: 80px;
+    height: 2px;
+    background: rgba(255,255,255,0.25);
+    overflow: hidden;
 }
 
-.view-more:hover{
-    opacity:0.7;
-    transform:translateY(-2px);
+.ui-fill {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transform: translateX(-100%);
+}
+
+.ui-fill.active {
+    animation: fillMove 8s linear forwards;
+}
+
+.ui-fill.done {
+    transform: translateX(0%);
+}
+
+@keyframes fillMove {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0%); }
 }
 
 /* =========================
-   SLIDER UI
+   SECTIONS (ABOUT / PROJECTS)
 ========================= */
-.slide-ui{
-    position:absolute;
 
-    right:6%;
-    bottom:42px;
-
-    display:flex;
-    gap:18px;
-
-    z-index:20;
+section {
+    padding: 120px 10%;
 }
 
-.ui-item{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.ui-num{
-    font-size:11px;
-    letter-spacing:2px;
-    color:#fff;
-    opacity:0.85;
+/* ABOUT */
+.about-section {
+    background: #fff;
+    color: #111;
 }
 
-.ui-bar{
-    width:74px;
-    height:2px;
-
-    background:rgba(255,255,255,0.22);
-
-    overflow:hidden;
+.about-text {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: #333;
 }
 
-.ui-fill{
-    width:100%;
-    height:100%;
-
-    background:#fff;
-
-    transform:translateX(-100%);
+.about-info {
+    display: flex;
+    gap: 60px;
 }
 
-.ui-fill.active{
-    animation:fillMove 8s linear forwards;
+.about-info strong {
+    display: block;
+    margin-bottom: 8px;
 }
 
-.ui-fill.done{
-    transform:translateX(0%);
+/* PROJECT GRID */
+.project-section {
+    background: #f7f7f7;
+    color: #111;
 }
 
-@keyframes fillMove{
-    from{
-        transform:translateX(-100%);
-    }
-    to{
-        transform:translateX(0%);
-    }
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
-/* =========================
-   SECTION COMMON
-========================= */
-section{
-    padding:140px 10%;
+.project-card {
+    text-decoration: none;
+    color: inherit;
 }
 
-.container{
-    max-width:1300px;
-    margin:0 auto;
+.project-card .img {
+    width: 100%;
+    height: 220px;
+    background: #ddd;
+    margin-bottom: 12px;
 }
 
-.section-title{
-    font-size:42px;
-    font-weight:300;
-    margin-bottom:50px;
-
-    letter-spacing:1px;
+.project-card h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-/* =========================
-   ABOUT
-========================= */
-.about-section{
-    background:#ffffff;
-    color:#111;
+.project-card span {
+    font-size: 13px;
+    color: #777;
 }
 
-.about-text{
-    font-size:20px;
-    line-height:1.9;
-
-    color:#333;
-
-    margin-bottom:60px;
+/* FOOTER */
+#footer-container {
+    position: relative;
+    z-index: 1;
 }
-
-.about-info{
-    display:flex;
-    gap:80px;
-    flex-wrap:wrap;
-}
-
-.about-info strong{
-    display:block;
-
-    font-size:13px;
-    letter-spacing:1px;
-    text-transform:uppercase;
-
-    margin-bottom:10px;
-
-    color:#888;
-}
-
-.about-info p{
-    font-size:18px;
-}
-
-/* =========================
-   PROJECT SECTION
-========================= */
-.project-section{
-    background:#f5f5f5;
-    color:#111;
-}
-
-.project-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:28px;
-}
-
-.project-card{
-    text-decoration:none;
-    color:inherit;
-
-    transition:transform 0.35s ease;
-}
-
-.project-card:hover{
-    transform:translateY(-8px);
-}
-
-/* image */
-.project-card .img{
-    width:100%;
-    height:260px;
-
-    background-size:cover;
-    background-position:center;
-
-    margin-bottom:18px;
-
-    transition:transform 0.5s ease;
-}
-
-.project-card:hover .img{
-    transform:scale(1.04);
-}
-
-/* titles */
-.project-card h3{
-    font-size:20px;
-    font-weight:400;
-
-    margin-bottom:8px;
-}
-
-.project-card span{
-    font-size:13px;
-    color:#777;
-    letter-spacing:1px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-#footer-container{
-    position:relative;
-    z-index:1;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-@media (max-width:900px){
-
-    .slide{
-        padding:0 7%;
-    }
-
-    .slide-content{
-        padding-top:120px;
-    }
-
-    .slide-content h2{
-        font-size:44px;
-    }
-
-    .project-grid{
-        grid-template-columns:1fr;
-    }
-
-    .project-card .img{
-        height:240px;
-    }
-
-    section{
-        padding:100px 7%;
-    }
-
-    .about-info{
-        gap:40px;
-    }
-}
-
-@media (max-width:768px){
-
-    .slide-ui{
-        right:50%;
-        transform:translateX(50%);
-        bottom:25px;
-    }
-
-    .slide-content h2{
-        font-size:36px;
-    }
-
-    .about-text{
-        font-size:17px;
-    }
-
-    .section-title{
-        font-size:34px;
-    }
-}
-
 </style>
 </head>
 
@@ -395,73 +247,31 @@ section{
 
     <div class="slide-container">
 
-        <!-- slide 1 -->
         <div class="slide active"
-        style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
-
+             style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80');">
             <div class="slide-content">
-
-                <span class="category">
-                    2025년, 서울시 서오동
-                </span>
-
-                <h2>
-                    서오그룹<br>
-                    신사옥
-                </h2>
-
-                <a class="view-more" href="projects/00001.html">
-                    View Project
-                </a>
-
+                <span class="category">2025년, 서울시 서오동</span>
+                <h2>서오그룹<br>신사옥</h2>
+                <a class="view-more" href="projects/00001.html">View Project</a>
             </div>
-
         </div>
 
-        <!-- slide 2 -->
         <div class="slide"
-        style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
-
+             style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=80');">
             <div class="slide-content">
-
-                <span class="category">
-                    2026년, 서울시 서오동
-                </span>
-
-                <h2>
-                    e편한세상<br>
-                    서오 포레스타
-                </h2>
-
-                <a class="view-more" href="projects/00004.html">
-                    View Project
-                </a>
-
+                <span class="category">2026년, 서울시 서오동</span>
+                <h2>e편한세상<br>서오 포레스타</h2>
+                <a class="view-more" href="projects/00004.html">View Project</a>
             </div>
-
         </div>
 
-        <!-- slide 3 -->
         <div class="slide"
-        style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
-
+             style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');">
             <div class="slide-content">
-
-                <span class="category">
-                    2026년, 서울시 서광동
-                </span>
-
-                <h2>
-                    서오출판사<br>
-                    신사옥
-                </h2>
-
-                <a class="view-more" href="projects/00005.html">
-                    View Project
-                </a>
-
+                <span class="category">2026년, 서울시 서광동</span>
+                <h2>서오출판사<br>신사옥</h2>
+                <a class="view-more" href="projects/00005.html">View Project</a>
             </div>
-
         </div>
 
     </div>
@@ -471,23 +281,17 @@ section{
 
         <div class="ui-item">
             <span class="ui-num">01</span>
-            <div class="ui-bar">
-                <div class="ui-fill"></div>
-            </div>
+            <div class="ui-bar"><div class="ui-fill"></div></div>
         </div>
 
         <div class="ui-item">
             <span class="ui-num">02</span>
-            <div class="ui-bar">
-                <div class="ui-fill"></div>
-            </div>
+            <div class="ui-bar"><div class="ui-fill"></div></div>
         </div>
 
         <div class="ui-item">
             <span class="ui-num">03</span>
-            <div class="ui-bar">
-                <div class="ui-fill"></div>
-            </div>
+            <div class="ui-bar"><div class="ui-fill"></div></div>
         </div>
 
     </div>
@@ -496,90 +300,62 @@ section{
 
 <!-- ABOUT -->
 <section class="about-section">
-
     <div class="container">
 
-        <h2 class="section-title">
-            ABOUT
-        </h2>
+        <h2>ABOUT</h2>
 
         <p class="about-text">
-            우리는 공간을 단순한 구조물이 아닌,
-            사람의 경험을 설계하는 매개체로 생각합니다.<br>
+            우리는 공간을 단순한 구조물이 아닌, 사람의 경험을 설계하는 매개체로 생각합니다.<br>
             도시와 맥락, 흐름을 연결하는 건축을 지향합니다.
         </p>
 
         <div class="about-info">
-
             <div>
                 <strong>Founded</strong>
                 <p>2018</p>
             </div>
-
             <div>
                 <strong>Location</strong>
                 <p>Seoul, Korea</p>
             </div>
-
             <div>
                 <strong>Focus</strong>
                 <p>Architecture / Interior</p>
             </div>
-
         </div>
 
     </div>
-
 </section>
 
-<!-- PROJECT -->
+<!-- PROJECTS -->
 <section class="project-section">
-
     <div class="container">
 
-        <h2 class="section-title">
-            LATEST PROJECTS
-        </h2>
+        <h2>LASTEST PROJECTS</h2>
 
         <div class="project-grid">
 
             <a href="projects/00001.html" class="project-card">
-
-                <div class="img"
-                style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80');">
-                </div>
-
+                <div class="img"></div>
                 <h3>Seo Books HQ</h3>
                 <span>2026</span>
-
             </a>
 
             <a href="projects/00004.html" class="project-card">
-
-                <div class="img"
-                style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80');">
-                </div>
-
+                <div class="img"></div>
                 <h3>E-Pyeonhansesang Seo Foresta</h3>
                 <span>2026</span>
-
             </a>
 
             <a href="projects/00005.html" class="project-card">
-
-                <div class="img"
-                style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80');">
-                </div>
-
+                <div class="img"></div>
                 <h3>Seo-1dong Community Center</h3>
                 <span>2026</span>
-
             </a>
 
         </div>
 
     </div>
-
 </section>
 
 <!-- FOOTER -->
@@ -587,119 +363,68 @@ section{
 
 <script>
 
-/* =========================
-   LOAD COMPONENT
-========================= */
-
-async function loadComponent(id, file){
-
-    const response = await fetch(file);
-    const data = await response.text();
-
-    document.getElementById(id).innerHTML = data;
-
+/* HEADER / FOOTER LOAD */
+function loadComponent(id, file) {
+    fetch(file)
+        .then(res => res.text())
+        .then(data => document.getElementById(id).innerHTML = data);
 }
 
-/* =========================
-   INIT
-========================= */
-
-window.addEventListener('DOMContentLoaded', async () => {
-
-    /* header/footer load */
-    await loadComponent('header-container', 'header.html');
-    await loadComponent('footer-container', 'footer.html');
-
-    /* =========================
-       HEADER SCROLL
-    ========================= */
-
-    const header = document.getElementById('siteHeader');
-
-    function updateHeader(){
-
-        if(window.scrollY > 0){
-
-            header.classList.add('scrolled');
-
-        }else{
-
-            header.classList.remove('scrolled');
-
-        }
-
-    }
-
-    updateHeader();
-
-    window.addEventListener('scroll', updateHeader);
-
+window.addEventListener('DOMContentLoaded', () => {
+    loadComponent('header-container', 'header.html');
+    loadComponent('footer-container', 'footer.html');
 });
 
-/* =========================
-   SLIDER
-========================= */
-
+/* SLIDER */
+let currentIdx = 0;
 const slides = document.querySelectorAll('.slide');
 const fills = document.querySelectorAll('.ui-fill');
-
-let currentIdx = 0;
 const total = slides.length;
 
 /* update bars */
-function updateBars(index){
+function updateBars(index) {
 
     fills.forEach((fill, i) => {
 
-        fill.classList.remove('active');
-
-        if(i < index){
-
+        if (i < index) {
+            fill.classList.remove('active');
             fill.classList.add('done');
-
-        }else if(i === index){
-
+        } else if (i === index) {
             fill.classList.remove('done');
-
             void fill.offsetWidth;
-
             fill.classList.add('active');
-
-        }else{
-
-            fill.classList.remove('done');
-
+        } else {
+            fill.classList.remove('active', 'done');
         }
 
     });
-
 }
 
 /* show slide */
-function showSlide(index){
+function showSlide(index) {
 
-    slides.forEach(slide => {
-        slide.classList.remove('active');
-    });
-
+    slides.forEach(s => s.classList.remove('active'));
     slides[index].classList.add('active');
 
     currentIdx = index;
 
     updateBars(index);
-
 }
 
 /* next */
-function nextSlide(){
-
+function nextSlide() {
     showSlide((currentIdx + 1) % total);
+}
 
+/* manual */
+function currentSlide(index) {
+    showSlide(index);
+    clearInterval(slideInterval);
+    slideInterval = setInterval(nextSlide, 8000);
 }
 
 /* init */
 showSlide(0);
-
 let slideInterval = setInterval(nextSlide, 8000);
 
 </script>

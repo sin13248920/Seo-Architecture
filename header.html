@@ -1,204 +1,134 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header Component</title>
 
-<style>
+    <style>
+        /* ===== 커스텀 폰트 ===== */
+        @font-face {
+            font-family: 'GwangjuFont';
+            src: url('빛고을광주_Medium.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
-/* ===== 커스텀 폰트 ===== */
-@font-face{
-    font-family:'GwangjuFont';
-    src:url('빛고을광주_Medium.ttf') format('truetype');
-    font-weight:normal;
-    font-style:normal;
-}
+        /* 전체 폰트 적용 */
+        * {
+            font-family: 'GwangjuFont', sans-serif;
+        }
 
-/* ===== 전체 ===== */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'GwangjuFont', sans-serif;
-}
+        /* ===== 헤더 ===== */
+        .site-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: #ffffff;
+            width: 100%;
+            border-bottom: 1px solid #eeeeee;
+            transition: all 0.3s ease;
+        }
 
-body{
-    background:#ffffff;
-    min-height:200vh; /* 스크롤 테스트용 */
-}
+        /* ===== 로고 ===== */
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
 
-/* ===== 헤더 ===== */
-.site-header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
+        .header-logo a {
+            display: inline-block;
+            text-decoration: none;
+        }
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+        .header-logo img {
+            height: 80px;   /* 🔥 로고 확대 */
+            width: auto;
+            display: block;
+        }
 
-    padding:10px 6%;
+        /* ===== 메뉴 ===== */
+        .header-nav {
+            display: flex;
+            justify-content: flex-end;
+        }
 
-    z-index:99999;
+        .header-nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 50px;
+        }
 
-    background:transparent;
+        .header-nav a {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            color: #000000;
+            text-decoration: none;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 6px;
+            transition: color 0.3s ease;
+        }
 
-    transition:
-        background 0.35s ease,
-        box-shadow 0.35s ease,
-        padding 0.35s ease,
-        backdrop-filter 0.35s ease;
-}
+        .header-nav a:hover {
+            color: #555555;
+        }
 
-/* ===== 스크롤 시 ===== */
-.site-header.scrolled{
-    background:#ffffff;
-    backdrop-filter:blur(10px);
+        .header-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #002c5f;
+            transition: width 0.3s ease;
+        }
 
-    box-shadow:
-        0 2px 15px rgba(0,0,0,0.08);
+        .header-nav a:hover::after {
+            width: 100%;
+        }
 
-    padding:8px 6%;
-}
+        /* ===== 반응형 ===== */
+        @media (max-width: 768px) {
+            .site-header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5%;
+            }
 
-/* ===== 로고 ===== */
-.header-logo{
-    display:flex;
-    align-items:center;
-}
+            .header-logo {
+                width: 100%;
+                justify-content: center;
+            }
 
-.header-logo a{
-    display:inline-block;
-    text-decoration:none;
-}
+            .header-nav {
+                width: 100%;
+                justify-content: center;
+            }
 
-.header-logo img{
-    height:58px;
-    width:auto;
-    display:block;
+            .header-nav ul {
+                gap: 20px;
+            }
 
-    transition:height 0.3s ease;
-}
+            .header-nav a {
+                font-size: 13px;
+            }
 
-/* ===== 스크롤 시 로고 ===== */
-.site-header.scrolled .header-logo img{
-    height:52px;
-}
-
-/* ===== 메뉴 ===== */
-.header-nav{
-    display:flex;
-    align-items:center;
-}
-
-.header-nav ul{
-    display:flex;
-    align-items:center;
-    list-style:none;
-    gap:38px;
-}
-
-/* ===== 메뉴 링크 ===== */
-.header-nav a{
-    position:relative;
-
-    font-size:13px;
-    font-weight:500;
-    letter-spacing:1.5px;
-
-    color:#ffffff;
-
-    text-decoration:none;
-    text-transform:uppercase;
-
-    padding-bottom:4px;
-
-    transition:
-        color 0.3s ease,
-        opacity 0.3s ease;
-}
-
-/* ===== 스크롤 시 메뉴 색 ===== */
-.site-header.scrolled .header-nav a{
-    color:#000000;
-}
-
-/* ===== 호버 ===== */
-.header-nav a:hover{
-    opacity:0.7;
-}
-
-/* ===== 밑줄 ===== */
-.header-nav a::after{
-    content:'';
-
-    position:absolute;
-    left:0;
-    bottom:0;
-
-    width:0;
-    height:1.5px;
-
-    background:#002c5f;
-
-    transition:width 0.3s ease;
-}
-
-.header-nav a:hover::after{
-    width:100%;
-}
-
-/* ===== 모바일 ===== */
-@media (max-width:768px){
-
-    .site-header{
-        padding:10px 5%;
-        flex-direction:column;
-        gap:12px;
-    }
-
-    .site-header.scrolled{
-        padding:8px 5%;
-    }
-
-    .header-logo{
-        width:100%;
-        justify-content:center;
-    }
-
-    .header-logo img{
-        height:48px;
-    }
-
-    .site-header.scrolled .header-logo img{
-        height:44px;
-    }
-
-    .header-nav{
-        width:100%;
-        justify-content:center;
-    }
-
-    .header-nav ul{
-        gap:18px;
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-
-    .header-nav a{
-        font-size:11px;
-        letter-spacing:1px;
-    }
-
-}
-
-</style>
+            .header-logo img {
+                height: 70px; /* 모바일에서는 살짝 줄임 */
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<header class="site-header" id="siteHeader">
+<header class="site-header">
 
     <!-- 로고 -->
     <div class="header-logo">
@@ -213,40 +143,11 @@ body{
             <li><a href="SERVICE.html">Service</a></li>
             <li><a href="PROJECT.html">Project</a></li>
             <li><a href="ABOUT.html">About</a></li>
-            <li><a href="CONTACT US.html">Contact</a></li>
+            <li><a href="CONTACT US.html">Contact Us</a></li>
         </ul>
     </nav>
 
 </header>
-
-<script>
-
-/* ===== 헤더 스크롤 효과 ===== */
-
-const header = document.getElementById('siteHeader');
-
-function updateHeader(){
-
-    /* 조금이라도 스크롤하면 */
-    if(window.scrollY > 0){
-
-        header.classList.add('scrolled');
-
-    }else{
-
-        header.classList.remove('scrolled');
-
-    }
-
-}
-
-/* 페이지 로드 시 즉시 실행 */
-updateHeader();
-
-/* 스크롤 시 실행 */
-window.addEventListener('scroll', updateHeader);
-
-</script>
 
 </body>
 </html>
