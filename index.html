@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>SEO Architecture</title>
+<title>Architecture Studio | 메인</title>
 
 <style>
 
@@ -22,15 +21,9 @@ html{
 }
 
 body{
-    font-family:
-        "Pretendard",
-        "Noto Sans KR",
-        "Apple SD Gothic Neo",
-        sans-serif;
-
+    font-family:"Times New Roman", Times, serif;
     background:#000;
     color:#fff;
-
     overflow-x:hidden;
 }
 
@@ -46,22 +39,19 @@ body{
 }
 
 /* =========================
-   HERO
+   HERO SLIDER
 ========================= */
 .main-visual{
     position:relative;
-
     width:100%;
     height:100vh;
-
     overflow:hidden;
 }
 
 .slide-container{
-    position:relative;
-
     width:100%;
     height:100%;
+    position:relative;
 }
 
 .slide{
@@ -75,12 +65,10 @@ body{
 
     opacity:0;
 
+    transition:opacity 1.2s ease;
+
     background-size:cover;
     background-position:center;
-
-    transition:
-        opacity 1.2s ease,
-        transform 7s ease;
 }
 
 /* active */
@@ -89,23 +77,12 @@ body{
     z-index:2;
 }
 
-.slide.active{
-    transform:scale(1.03);
-}
-
 /* overlay */
 .slide::before{
     content:'';
-
     position:absolute;
     inset:0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,0.25),
-            rgba(0,0,0,0.58)
-        );
+    background:rgba(0,0,0,0.48);
 }
 
 /* =========================
@@ -115,32 +92,28 @@ body{
     position:relative;
     z-index:5;
 
-    max-width:820px;
+    max-width:800px;
 
-    padding-top:80px;
+    padding-top:90px;
 }
 
 .category{
     display:block;
 
     font-size:14px;
-    font-weight:400;
-
     letter-spacing:2px;
 
-    color:rgba(255,255,255,0.75);
+    color:rgba(255,255,255,0.7);
 
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .slide-content h2{
-    font-size:clamp(42px, 6vw, 82px);
-    font-weight:600;
-    line-height:1.08;
+    font-size:clamp(38px, 5vw, 72px);
+    font-weight:300;
+    line-height:1.15;
 
-    letter-spacing:-2px;
-
-    margin-bottom:34px;
+    margin-bottom:28px;
 }
 
 /* button */
@@ -150,22 +123,17 @@ body{
     gap:10px;
 
     color:#fff;
-
     text-decoration:none;
-    text-transform:uppercase;
 
     font-size:12px;
-    font-weight:500;
-
     letter-spacing:2px;
+    text-transform:uppercase;
 
-    padding-bottom:7px;
+    padding-bottom:6px;
 
-    border-bottom:1px solid rgba(255,255,255,0.75);
+    border-bottom:1px solid rgba(255,255,255,0.8);
 
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
+    transition:all 0.3s ease;
 }
 
 .view-more:hover{
@@ -174,7 +142,7 @@ body{
 }
 
 /* =========================
-   SLIDE UI
+   SLIDER UI
 ========================= */
 .slide-ui{
     position:absolute;
@@ -191,32 +159,30 @@ body{
 .ui-item{
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:6px;
 }
 
 .ui-num{
     font-size:11px;
-    font-weight:500;
-
     letter-spacing:2px;
-
-    opacity:0.9;
+    color:#fff;
+    opacity:0.85;
 }
 
 .ui-bar{
-    width:72px;
+    width:74px;
     height:2px;
 
-    overflow:hidden;
+    background:rgba(255,255,255,0.22);
 
-    background:rgba(255,255,255,0.25);
+    overflow:hidden;
 }
 
 .ui-fill{
     width:100%;
     height:100%;
 
-    background:#ffffff;
+    background:#fff;
 
     transform:translateX(-100%);
 }
@@ -230,15 +196,12 @@ body{
 }
 
 @keyframes fillMove{
-
     from{
         transform:translateX(-100%);
     }
-
     to{
         transform:translateX(0%);
     }
-
 }
 
 /* =========================
@@ -249,19 +212,16 @@ section{
 }
 
 .container{
-    max-width:1320px;
+    max-width:1300px;
     margin:0 auto;
 }
 
 .section-title{
-    font-size:48px;
-    font-weight:700;
+    font-size:42px;
+    font-weight:300;
+    margin-bottom:50px;
 
-    letter-spacing:-1px;
-
-    margin-bottom:54px;
-
-    color:#111;
+    letter-spacing:1px;
 }
 
 /* =========================
@@ -269,19 +229,16 @@ section{
 ========================= */
 .about-section{
     background:#ffffff;
+    color:#111;
 }
 
 .about-text{
-    font-size:22px;
-    font-weight:400;
-
+    font-size:20px;
     line-height:1.9;
 
-    color:#222;
+    color:#333;
 
-    max-width:1000px;
-
-    margin-bottom:70px;
+    margin-bottom:60px;
 }
 
 .about-info{
@@ -293,104 +250,73 @@ section{
 .about-info strong{
     display:block;
 
-    font-size:12px;
-    font-weight:700;
-
-    letter-spacing:2px;
+    font-size:13px;
+    letter-spacing:1px;
     text-transform:uppercase;
 
-    margin-bottom:12px;
+    margin-bottom:10px;
 
     color:#888;
 }
 
 .about-info p{
     font-size:18px;
-    color:#111;
 }
 
 /* =========================
-   PROJECT
+   PROJECT SECTION
 ========================= */
 .project-section{
     background:#f5f5f5;
+    color:#111;
 }
 
 .project-grid{
     display:grid;
     grid-template-columns:repeat(3, 1fr);
-
-    gap:30px;
+    gap:28px;
 }
 
 .project-card{
-    display:block;
-
     text-decoration:none;
-    color:#111;
+    color:inherit;
 
-    overflow:hidden;
+    transition:transform 0.35s ease;
 }
 
-.project-image{
-    position:relative;
+.project-card:hover{
+    transform:translateY(-8px);
+}
 
+/* image */
+.project-card .img{
     width:100%;
-    height:270px;
+    height:260px;
 
-    overflow:hidden;
+    background-size:cover;
+    background-position:center;
 
-    margin-bottom:20px;
+    margin-bottom:18px;
+
+    transition:transform 0.5s ease;
 }
 
-.project-image img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:transform 0.7s ease;
+.project-card:hover .img{
+    transform:scale(1.04);
 }
 
-.project-card:hover .project-image img{
-    transform:scale(1.08);
-}
-
+/* titles */
 .project-card h3{
-    font-size:22px;
-    font-weight:600;
+    font-size:20px;
+    font-weight:400;
 
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .project-card span{
     font-size:13px;
     color:#777;
-
     letter-spacing:1px;
-}
-
-/* =========================
-   PHILOSOPHY
-========================= */
-.philosophy-section{
-    background:#111;
-    color:#fff;
-}
-
-.philosophy-section .section-title{
-    color:#fff;
-}
-
-.philosophy-text{
-    max-width:1000px;
-
-    font-size:28px;
-    line-height:1.7;
-
-    font-weight:300;
-
-    color:rgba(255,255,255,0.92);
 }
 
 /* =========================
@@ -404,57 +330,56 @@ section{
 /* =========================
    RESPONSIVE
 ========================= */
-@media (max-width:1000px){
-
-    .project-grid{
-        grid-template-columns:1fr;
-    }
-
-    .project-image{
-        height:320px;
-    }
-
-}
-
-@media (max-width:768px){
+@media (max-width:900px){
 
     .slide{
         padding:0 7%;
     }
 
     .slide-content{
-        padding-top:130px;
+        padding-top:120px;
     }
 
     .slide-content h2{
-        font-size:42px;
+        font-size:44px;
     }
 
-    .slide-ui{
-        right:50%;
-        transform:translateX(50%);
+    .project-grid{
+        grid-template-columns:1fr;
+    }
+
+    .project-card .img{
+        height:240px;
     }
 
     section{
         padding:100px 7%;
     }
 
-    .section-title{
+    .about-info{
+        gap:40px;
+    }
+}
+
+@media (max-width:768px){
+
+    .slide-ui{
+        right:50%;
+        transform:translateX(50%);
+        bottom:25px;
+    }
+
+    .slide-content h2{
         font-size:36px;
     }
 
     .about-text{
-        font-size:18px;
+        font-size:17px;
     }
 
-    .philosophy-text{
-        font-size:21px;
+    .section-title{
+        font-size:34px;
     }
-
-    .project-image{
-        height:240px;
-    }
-
 }
 
 </style>
@@ -477,15 +402,15 @@ section{
             <div class="slide-content">
 
                 <span class="category">
-                    2026 · SEO DISTRICT · SEOUL
+                    2025년, 서울시 서오동
                 </span>
 
                 <h2>
-                    SEO GROUP<br>
-                    HEADQUARTERS
+                    서오그룹<br>
+                    신사옥
                 </h2>
 
-                <a href="projects/00001.html" class="view-more">
+                <a class="view-more" href="projects/00001.html">
                     View Project
                 </a>
 
@@ -500,15 +425,15 @@ section{
             <div class="slide-content">
 
                 <span class="category">
-                    2026 · SEO DISTRICT · SEOUL
+                    2026년, 서울시 서오동
                 </span>
 
                 <h2>
-                    E-PYEONHANSesang<br>
-                    SEO FORESTA
+                    e편한세상<br>
+                    서오 포레스타
                 </h2>
 
-                <a href="projects/00004.html" class="view-more">
+                <a class="view-more" href="projects/00004.html">
                     View Project
                 </a>
 
@@ -523,15 +448,15 @@ section{
             <div class="slide-content">
 
                 <span class="category">
-                    2027 · SEOGWANG · SEOUL
+                    2026년, 서울시 서광동
                 </span>
 
                 <h2>
-                    SEO PUBLISHING<br>
-                    OFFICE
+                    서오출판사<br>
+                    신사옥
                 </h2>
 
-                <a href="projects/00005.html" class="view-more">
+                <a class="view-more" href="projects/00005.html">
                     View Project
                 </a>
 
@@ -545,33 +470,24 @@ section{
     <div class="slide-ui">
 
         <div class="ui-item">
-
             <span class="ui-num">01</span>
-
             <div class="ui-bar">
                 <div class="ui-fill"></div>
             </div>
-
         </div>
 
         <div class="ui-item">
-
             <span class="ui-num">02</span>
-
             <div class="ui-bar">
                 <div class="ui-fill"></div>
             </div>
-
         </div>
 
         <div class="ui-item">
-
             <span class="ui-num">03</span>
-
             <div class="ui-bar">
                 <div class="ui-fill"></div>
             </div>
-
         </div>
 
     </div>
@@ -588,10 +504,9 @@ section{
         </h2>
 
         <p class="about-text">
-            우리는 건축을 단순한 구조물이 아닌,
-            도시의 흐름과 사람의 경험을 연결하는 공간이라 생각합니다.
-            절제된 조형과 맥락 중심의 설계를 통해
-            새로운 도시 풍경을 제안합니다.
+            우리는 공간을 단순한 구조물이 아닌,
+            사람의 경험을 설계하는 매개체로 생각합니다.<br>
+            도시와 맥락, 흐름을 연결하는 건축을 지향합니다.
         </p>
 
         <div class="about-info">
@@ -608,7 +523,7 @@ section{
 
             <div>
                 <strong>Focus</strong>
-                <p>Architecture / Urban / Interior</p>
+                <p>Architecture / Interior</p>
             </div>
 
         </div>
@@ -630,66 +545,38 @@ section{
 
             <a href="projects/00001.html" class="project-card">
 
-                <div class="project-image">
-
-                    <img
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80">
-
+                <div class="img"
+                style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80');">
                 </div>
 
-                <h3>SEO GROUP HQ</h3>
+                <h3>Seo Books HQ</h3>
                 <span>2026</span>
 
             </a>
 
             <a href="projects/00004.html" class="project-card">
 
-                <div class="project-image">
-
-                    <img
-                    src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80">
-
+                <div class="img"
+                style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80');">
                 </div>
 
-                <h3>SEO FORESTA</h3>
+                <h3>E-Pyeonhansesang Seo Foresta</h3>
                 <span>2026</span>
 
             </a>
 
             <a href="projects/00005.html" class="project-card">
 
-                <div class="project-image">
-
-                    <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80">
-
+                <div class="img"
+                style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80');">
                 </div>
 
-                <h3>SEO PUBLISHING OFFICE</h3>
-                <span>2027</span>
+                <h3>Seo-1dong Community Center</h3>
+                <span>2026</span>
 
             </a>
 
         </div>
-
-    </div>
-
-</section>
-
-<!-- PHILOSOPHY -->
-<section class="philosophy-section">
-
-    <div class="container">
-
-        <h2 class="section-title">
-            PHILOSOPHY
-        </h2>
-
-        <p class="philosophy-text">
-            좋은 건축은 눈에 띄기보다,
-            도시와 자연스럽게 공존해야 한다고 믿습니다.
-            우리는 시간이 지나도 남는 공간을 설계합니다.
-        </p>
 
     </div>
 
@@ -707,9 +594,9 @@ section{
 async function loadComponent(id, file){
 
     const response = await fetch(file);
-    const html = await response.text();
+    const data = await response.text();
 
-    document.getElementById(id).innerHTML = html;
+    document.getElementById(id).innerHTML = data;
 
 }
 
@@ -719,15 +606,33 @@ async function loadComponent(id, file){
 
 window.addEventListener('DOMContentLoaded', async () => {
 
-    await loadComponent(
-        'header-container',
-        'header.html'
-    );
+    /* header/footer load */
+    await loadComponent('header-container', 'header.html');
+    await loadComponent('footer-container', 'footer.html');
 
-    await loadComponent(
-        'footer-container',
-        'footer.html'
-    );
+    /* =========================
+       HEADER SCROLL
+    ========================= */
+
+    const header = document.getElementById('siteHeader');
+
+    function updateHeader(){
+
+        if(window.scrollY > 0){
+
+            header.classList.add('scrolled');
+
+        }else{
+
+            header.classList.remove('scrolled');
+
+        }
+
+    }
+
+    updateHeader();
+
+    window.addEventListener('scroll', updateHeader);
 
 });
 
@@ -739,10 +644,9 @@ const slides = document.querySelectorAll('.slide');
 const fills = document.querySelectorAll('.ui-fill');
 
 let currentIdx = 0;
-
 const total = slides.length;
 
-/* bar */
+/* update bars */
 function updateBars(index){
 
     fills.forEach((fill, i) => {
@@ -771,7 +675,7 @@ function updateBars(index){
 
 }
 
-/* show */
+/* show slide */
 function showSlide(index){
 
     slides.forEach(slide => {
@@ -789,16 +693,14 @@ function showSlide(index){
 /* next */
 function nextSlide(){
 
-    showSlide(
-        (currentIdx + 1) % total
-    );
+    showSlide((currentIdx + 1) % total);
 
 }
 
 /* init */
 showSlide(0);
 
-setInterval(nextSlide, 8000);
+let slideInterval = setInterval(nextSlide, 8000);
 
 </script>
 
