@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SEO ARCHITECTURE — PROJECT</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Noto Sans KR', sans-serif;
+    background:#fff;
+    color:#111;
+    overflow-x:hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:100%;
+
+    z-index:9000;
+
+    padding:28px 60px;
+
+    background:transparent;
+
+    transition:0.35s ease;
+}
+
+header.scrolled{
+
+    background:#fff;
+
+    padding:18px 60px;
+
+    box-shadow:0 2px 25px rgba(0,0,0,0.06);
+}
+
+.header-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.logo img{
+    height:44px;
+
+    transition:0.35s ease;
+}
+
+/* =========================
+   MENU BUTTON
+========================= */
+
+.menu-btn{
+    width:42px;
+    height:42px;
+
+    background:none;
+    border:none;
+
+    cursor:pointer;
+
+    position:relative;
+}
+
+.menu-btn span{
+    position:absolute;
+
+    left:7px;
+
+    width:28px;
+    height:2px;
+
+    background:#fff;
+
+    transition:0.3s;
+}
+
+header.scrolled .menu-btn span{
+    background:#111;
+}
+
+.menu-btn span:nth-child(1){
+    top:13px;
+}
+
+.menu-btn span:nth-child(2){
+    top:20px;
+}
+
+.menu-btn span:nth-child(3){
+    top:27px;
+}
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.menu-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.35);
+
+    z-index:9800;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:0.35s;
+}
+
+.menu-overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.side-menu{
+    position:fixed;
+    top:0;
+    right:-420px;
+
+    width:400px;
+    max-width:90vw;
+    height:100vh;
+
+    background:#fff;
+
+    z-index:9990;
+
+    padding:120px 50px;
+
+    transition:0.45s ease;
+
+    box-shadow:-10px 0 40px rgba(0,0,0,0.08);
+}
+
+.side-menu.active{
+    right:0;
+}
+
+.menu-close{
+    position:absolute;
+
+    top:28px;
+    right:28px;
+
+    width:42px;
+    height:42px;
+
+    background:none;
+    border:none;
+
+    cursor:pointer;
+}
+
+.menu-close::before,
+.menu-close::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:20px;
+    left:5px;
+
+    width:32px;
+    height:2px;
+
+    background:#111;
+}
+
+.menu-close::before{
+    transform:rotate(45deg);
+}
+
+.menu-close::after{
+    transform:rotate(-45deg);
+}
+
+.side-menu ul{
+    list-style:none;
+}
+
+.side-menu li{
+    margin-bottom:34px;
+}
+
+.side-menu a{
+    text-decoration:none;
+
+    color:#111;
+
+    font-size:2rem;
+    font-weight:700;
+
+    transition:0.25s;
+}
+
+.side-menu a:hover{
+    opacity:0.45;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.page-hero{
+
+    position:relative;
+
+    width:100%;
+    height:78vh;
+
+    overflow:hidden;
+
+    display:flex;
+    align-items:flex-end;
+
+    padding:
+    0
+    7%
+    90px;
+}
+
+/* 배경 이미지 */
+
+.hero-bg{
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+    url('https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2400&auto=format&fit=crop');
+
+    background-size:cover;
+    background-position:center;
+
+    transform:scale(1.05);
+}
+
+/* 오버레이 */
+
+.hero-overlay{
+
+    position:absolute;
+    inset:0;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.75),
+        rgba(0,0,0,0.15),
+        rgba(0,0,0,0.35)
+    );
+}
+
+.hero-inner{
+
+    position:relative;
+
+    z-index:10;
+
+    color:#fff;
+
+    max-width:760px;
+}
+
+.page-hero h1{
+
+    font-size:clamp(3rem, 8vw, 7rem);
+
+    line-height:0.95;
+
+    letter-spacing:-4px;
+
+    margin-bottom:26px;
+}
+
+.page-hero p{
+
+    line-height:2;
+
+    font-size:1rem;
+
+    opacity:0.9;
+}
+
+/* =========================
+   PROJECTS
+========================= */
+
+.projects{
+
+    padding:
+    50px
+    7%
+    140px;
+}
+
+.project-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3, 1fr);
+
+    gap:24px;
+}
+
+/* =========================
+   PROJECT TILE
+========================= */
+
+.project-item{
+
+    position:relative;
+
+    aspect-ratio:1/1;
+
+    overflow:hidden;
+
+    background:#000;
+
+    cursor:pointer;
+}
+
+.project-item img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:
+    transform 1s ease,
+    opacity 0.5s ease;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.project-overlay{
+
+    position:absolute;
+    inset:0;
+
+    padding:34px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(0,0,0,0.85),
+        rgba(0,0,0,0.15)
+    );
+
+    color:#fff;
+
+    opacity:0;
+
+    transition:0.45s ease;
+}
+
+.project-overlay span{
+
+    font-size:0.72rem;
+
+    letter-spacing:3px;
+
+    opacity:0.72;
+
+    margin-bottom:14px;
+}
+
+.project-overlay h2{
+
+    font-size:2rem;
+
+    line-height:1.05;
+
+    margin-bottom:12px;
+
+    transform:translateY(20px);
+
+    transition:0.45s ease;
+}
+
+.project-overlay p{
+
+    font-size:0.92rem;
+
+    opacity:0.82;
+
+    transform:translateY(20px);
+
+    transition:0.55s ease;
+}
+
+/* =========================
+   HOVER
+========================= */
+
+.project-item:hover img{
+
+    transform:scale(1.08);
+
+    opacity:0.65;
+}
+
+.project-item:hover .project-overlay{
+
+    opacity:1;
+}
+
+.project-item:hover h2,
+.project-item:hover p{
+
+    transform:translateY(0);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    position:relative;
+
+    z-index:300;
+
+    width:100%;
+
+    background:#111;
+
+    padding:42px 7%;
+}
+
+.footer-inner{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+footer p{
+    color:rgba(255,255,255,0.72);
+
+    font-size:0.9rem;
+
+    letter-spacing:0.5px;
+
+    line-height:1.8;
+
+    text-align:center;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:1000px){
+
+    .project-grid{
+
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+}
+
+@media (max-width:700px){
+
+    header{
+        padding:24px;
+    }
+
+    header.scrolled{
+        padding:18px 24px;
+    }
+
+    .logo img{
+        height:38px;
+    }
+
+    .page-hero{
+
+        height:72vh;
+
+        padding:
+        0
+        24px
+        70px;
+    }
+
+    .page-hero h1{
+
+        letter-spacing:-2px;
+    }
+
+    .projects{
+
+        padding:
+        40px
+        24px
+        100px;
+    }
+
+    .project-grid{
+
+        grid-template-columns:1fr;
+
+        gap:18px;
+    }
+
+    .project-overlay{
+
+        opacity:1;
+    }
+
+    .project-overlay h2,
+    .project-overlay p{
+
+        transform:none;
+    }
+
+    .side-menu{
+        padding:110px 35px;
+    }
+
+    .side-menu a{
+        font-size:1.7rem;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="header-inner">
+
+        <a href="index.html" class="logo">
+            <img src="seoarchilogow.png" alt="SEO Logo" id="headerLogo">
+        </a>
+
+        <button class="menu-btn">
+
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </button>
+
+    </div>
+
+</header>
+
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div class="menu-overlay"></div>
+
+<nav class="side-menu">
+
+    <button class="menu-close"></button>
+
+    <ul>
+
+        <li><a href="service.html">SERVICE</a></li>
+        <li><a href="project.html">PROJECT</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="contact.html">CONTACT US</a></li>
+
+    </ul>
+
+</nav>
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="page-hero">
+
+    <div class="hero-bg"></div>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner">
+
+        <h1>
+            PROJECT
+        </h1>
+
+        <p>
+            SEO Architecture는 도시와 사람 사이의 관계를 탐구하며,
+            상업시설·주거·문화·공공건축 등 다양한 프로젝트를 설계합니다.
+        </p>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     PROJECTS
+========================= -->
+
+<section class="projects">
+
+<div class="project-grid">
+
+    <div class="project-item">
+
+        <img src="slide/thum1.jpg" alt="">
+
+        <div class="project-overlay">
+
+            <span>PUBLIC ARCHITECTURE</span>
+
+            <h2>
+                서포동<br>
+                행정복지센터
+            </h2>
+
+            <p>
+                SEOUL · 2026
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="slide/thum2.jpg" alt="">
+
+        <div class="project-overlay">
+
+            <span>HEADQUARTER</span>
+
+            <h2>
+                서오그룹<br>
+                신사옥
+            </h2>
+
+            <p>
+                SEOUL · 2024
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="slide/thum3.jpg" alt="">
+
+        <div class="project-overlay">
+
+            <span>RESIDENTIAL</span>
+
+            <h2>
+                e편한세상<br>
+                서오 포레스타
+            </h2>
+
+            <p>
+                SEOUL · 2026
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?q=80&w=2000&auto=format&fit=crop" alt="">
+
+        <div class="project-overlay">
+
+            <span>OFFICE</span>
+
+            <h2>
+                Urban<br>
+                Frame
+            </h2>
+
+            <p>
+                SEOUL · 2023
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2000&auto=format&fit=crop" alt="">
+
+        <div class="project-overlay">
+
+            <span>PRIVATE HOUSE</span>
+
+            <h2>
+                Silent<br>
+                Villa
+            </h2>
+
+            <p>
+                JEJU · 2022
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2000&auto=format&fit=crop" alt="">
+
+        <div class="project-overlay">
+
+            <span>CULTURAL SPACE</span>
+
+            <h2>
+                SEO<br>
+                ART CENTER
+            </h2>
+
+            <p>
+                BUSAN · 2025
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=2000&auto=format&fit=crop" alt="">
+
+        <div class="project-overlay">
+
+            <span>RESIDENTIAL</span>
+
+            <h2>
+                Horizon<br>
+                House
+            </h2>
+
+            <p>
+                JEJU · 2024
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="https://images.unsplash.com/photo-1519643381401-22c77e60520e?q=80&w=2000&auto=format&fit=crop" alt="">
+
+        <div class="project-overlay">
+
+            <span>COMMERCIAL</span>
+
+            <h2>
+                The<br>
+                Avenue
+            </h2>
+
+            <p>
+                SEOUL · 2025
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="project-item">
+
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=2000&auto=format&fit=crop" alt="">
+
+        <div class="project-overlay">
+
+            <span>HOSPITALITY</span>
+
+            <h2>
+                Mono<br>
+                Hotel
+            </h2>
+
+            <p>
+                BUSAN · 2023
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div class="footer-inner">
+
+<p>
+Copyright © 2026 SEO Architecture. All rights reserved.
+</p>
+
+</div>
+
+</footer>
+
+<script>
+
+/* =========================
+   HEADER SCROLL
+========================= */
+
+const header = document.querySelector('header');
+const headerLogo = document.getElementById('headerLogo');
+
+window.addEventListener('scroll', () => {
+
+    if(window.scrollY > 80){
+
+        header.classList.add('scrolled');
+
+        headerLogo.src = 'seoarchilogo.png';
+
+    }else{
+
+        header.classList.remove('scrolled');
+
+        headerLogo.src = 'seoarchilogow.png';
+
+    }
+
+});
+
+/* =========================
+   SIDE MENU
+========================= */
+
+const menuBtn = document.querySelector('.menu-btn');
+
+const menuClose = document.querySelector('.menu-close');
+
+const sideMenu = document.querySelector('.side-menu');
+
+const overlay = document.querySelector('.menu-overlay');
+
+function openMenu(){
+
+    sideMenu.classList.add('active');
+
+    overlay.classList.add('active');
+
+    document.body.style.overflow = 'hidden';
+
+}
+
+function closeMenu(){
+
+    sideMenu.classList.remove('active');
+
+    overlay.classList.remove('active');
+
+    document.body.style.overflow = '';
+
+}
+
+menuBtn.addEventListener('click', openMenu);
+
+menuClose.addEventListener('click', closeMenu);
+
+overlay.addEventListener('click', closeMenu);
+
+</script>
+
+</body>
+</html>
